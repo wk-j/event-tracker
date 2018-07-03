@@ -1,9 +1,13 @@
 var service = "http://localhost:1234"
 
-document.body.addEventListener("mousemove", e => {
-
+document.addEventListener("mousemove", e => {
+    console.log(e)
 })
 
-document.body.addEventListener("input", e => {
-
+document.addEventListener("input", e => {
+    // console.log(e)
 });
+
+document.addEventListener("keypress", e => {
+    console.log(e)
+})
