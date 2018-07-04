@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using EventTracker.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -37,6 +38,9 @@ namespace EventTracker {
 
             app
                 .UseStaticFiles()
+                .UseSignalR(routes => {
+                    routes.MapHub<TrackingHub>("/trackingHub");
+                })
                 .UseCors(builder => {
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();

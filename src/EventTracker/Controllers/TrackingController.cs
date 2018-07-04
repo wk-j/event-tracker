@@ -1,5 +1,7 @@
+using EventTracker.Hubs;
 using EventTracker.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.Logging;
 
 namespace EventTracker.Controllers {
@@ -9,20 +11,28 @@ namespace EventTracker.Controllers {
 
     [Route("api/[controller]/[action]")]
     public class TrackingController : ControllerBase {
+
         private readonly ILogger<TrackingController> logger;
-        public TrackingController(ILogger<TrackingController> logger) {
+        private IHubContext<TrackingHub> hub;
+
+        public TrackingController(ILogger<TrackingController> logger, IHubContext<TrackingHub> hub) {
             this.logger = logger;
+            this.hub = hub;
         }
 
         [HttpPost]
-        public Result NewMouseMove([FromBody] MouseEvent evt) {
+        public Result MouseMove([FromBody] MouseEvent evt) {
             logger.LogInformation("({0}, {1})", evt.ClientX, evt.ClientY);
+            HubFunctions.FireMouseMove(hub.Clients, evt);
+
             return new Result { Success = true };
         }
 
         [HttpPost]
-        public Result NewKeyPress([FromBody] KeyPressEvent evt) {
+        public Result KeyPress([FromBody] KeyPressEvent evt) {
             logger.LogInformation("{0}", evt.Key);
+            HubFunctions.FireKeyPress(hub.Clients, evt);
+
             return new Result { Success = true };
         }
     }
