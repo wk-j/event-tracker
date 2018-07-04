@@ -7,17 +7,22 @@ namespace EventTracker.Controllers {
         public bool Success { set; get; }
     }
 
+    [Route("api/[controller]/[action]")]
     public class TrackingController : ControllerBase {
         private readonly ILogger<TrackingController> logger;
         public TrackingController(ILogger<TrackingController> logger) {
             this.logger = logger;
         }
 
-        public Result NewMouseEvent([FromBody] MouseEvent evt) {
+        [HttpPost]
+        public Result NewMouseMove([FromBody] MouseEvent evt) {
+            logger.LogInformation("({0}, {1})", evt.ClientX, evt.ClientY);
             return new Result { Success = true };
         }
 
-        public Result NewKeyPressEvent([FromBody] KeyPressEvent evt) {
+        [HttpPost]
+        public Result NewKeyPress([FromBody] KeyPressEvent evt) {
+            logger.LogInformation("{0}", evt.Key);
             return new Result { Success = true };
         }
     }

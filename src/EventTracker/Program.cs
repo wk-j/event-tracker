@@ -16,7 +16,8 @@ namespace EventTracker {
         public static void Main(string[] args) {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
+                .MinimumLevel.Override("Microsoft", LogEventLevel.Error)
+                .MinimumLevel.Override("System", LogEventLevel.Error)
                 .WriteTo.Console()
                 .CreateLogger();
 
@@ -26,6 +27,9 @@ namespace EventTracker {
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
                 .UseSerilog()
+                .ConfigureLogging(config => {
+                    config.ClearProviders();
+                })
                 .UseStartup<Startup>();
     }
 }
