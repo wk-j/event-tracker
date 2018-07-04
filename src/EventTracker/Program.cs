@@ -21,7 +21,6 @@ namespace EventTracker {
                 .MinimumLevel.Override("System", LogEventLevel.Error)
                 .WriteTo.Console()
                 .CreateLogger();
-
             CreateWebHostBuilder(args).Build().Run();
         }
 
@@ -31,6 +30,7 @@ namespace EventTracker {
                 .ConfigureLogging(config => {
                     config.ClearProviders();
                 })
+                // .UseUrls("http://*5000")
                 .UseStartup<Startup>();
     }
 }
