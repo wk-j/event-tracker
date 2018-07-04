@@ -4,11 +4,11 @@
         "moduleResolution": "node",
         "target": "es5",
         "lib": [
-            "dom",
-            "es6"
+            "es6",
+            "dom"
         ],
         "esModuleInterop": true,
-        "sourceMap": true,
+        "sourceMap": false,
         "rootDir": "."
     },
     "exclude": [

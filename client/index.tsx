@@ -2,7 +2,7 @@ import React from "react"
 import ReactDOM from "react-dom"
 import { hubConnection } from "./hub";
 
-import "./style.css"
+import "./css/style.css"
 
 type State = {
     clientX: number
