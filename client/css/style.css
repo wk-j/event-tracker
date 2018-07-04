@@ -1,3 +1,14 @@
+.rainbow {
+    background: red;
+    background: -webkit-linear-gradient(left, orange , yellow, green, cyan, blue, violet);
+    background: -o-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: -moz-linear-gradient(right, orange, yellow, green, cyan, blue, violet);
+    background: linear-gradient(to right, orange , yellow, green, cyan, blue, violet);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-size: 20vw;
+}
+
 div.key {
     font-size: 300px;
     color: orange;
@@ -6,12 +17,14 @@ div.key {
 
 div.word {
     font-size: 30px;
-    color: blueviolet;
-    padding-bottom: 20px;
+    /* color: blueviolet; */
+    padding-bottom: 40px;
     text-shadow: 1px 1px lightgrey;
+    letter-spacing: 1px;
 }
 
 div.client {
     font-size: 50px;
     text-shadow: 1px 1px lightgrey;
+    letter-spacing: 5px;
 }
