@@ -37,7 +37,7 @@ class App extends React.Component<{}, State> {
 
     public render() {
         return (
-            <div style={{ width: "500px", marginRight: "auto", marginLeft: "auto", textAlign: "center" }}>
+            <div style={{ width: "1000px", marginRight: "auto", marginLeft: "auto", textAlign: "center" }}>
                 <div className="key">{this.state.key}</div>
                 <div className="client">({this.state.clientX}, {this.state.clientY})</div>
             </div>

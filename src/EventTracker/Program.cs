@@ -30,7 +30,7 @@ namespace EventTracker {
                 .ConfigureLogging(config => {
                     config.ClearProviders();
                 })
-                // .UseUrls("http://*5000")
+                .UseUrls("https://*:5001")
                 .UseStartup<Startup>();
     }
 }
