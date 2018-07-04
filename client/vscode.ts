@@ -8,15 +8,15 @@ type Result = {
 }
 
 class Api {
-    static async newKeyPress(event: KeyboardEvent) {
-        const url = `${service}/api/tracking/newKeyPress`
+    public static async newKeyPress(event: KeyboardEvent) {
+        const url = `${service}/api/tracking/keyPress`
         return await axios.post<Result>(url, {
             keyCode: event.keyCode,
             key: event.key
         })
     }
-    static async newMouseMove(event: MouseEvent) {
-        const url = `${service}/api/tracking/newMouseMove`
+    public static async newMouseMove(event: MouseEvent) {
+        const url = `${service}/api/tracking/mouseMove`
         return await axios.post<Result>(url, {
             clientX: event.clientX,
             clientY: event.clientY
@@ -25,11 +25,9 @@ class Api {
 }
 
 document.addEventListener("mousemove", async e => {
-    var rs = await Api.newMouseMove(e)
-    // console.log(rs.data);
+    let rs = await Api.newMouseMove(e)
 })
 
 document.addEventListener("keypress", async e => {
-    var rs = await Api.newKeyPress(e)
-    // console.log(rs.data);
+    let rs = await Api.newKeyPress(e)
 })

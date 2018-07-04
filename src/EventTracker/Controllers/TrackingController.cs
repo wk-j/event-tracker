@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using EventTracker.Hubs;
 using EventTracker.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -21,18 +22,16 @@ namespace EventTracker.Controllers {
         }
 
         [HttpPost]
-        public Result MouseMove([FromBody] MouseEvent evt) {
+        public async Task<Result> MouseMove([FromBody] MouseEvent evt) {
             logger.LogInformation("({0}, {1})", evt.ClientX, evt.ClientY);
-            HubFunctions.FireMouseMove(hub.Clients, evt);
-
+            await HubFunctions.FireMouseMove(hub.Clients, evt);
             return new Result { Success = true };
         }
 
         [HttpPost]
-        public Result KeyPress([FromBody] KeyPressEvent evt) {
+        public async Task<Result> KeyPress([FromBody] KeyPressEvent evt) {
             logger.LogInformation("{0}", evt.Key);
-            HubFunctions.FireKeyPress(hub.Clients, evt);
-
+            await HubFunctions.FireKeyPress(hub.Clients, evt);
             return new Result { Success = true };
         }
     }

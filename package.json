@@ -5,12 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel client/index.html -d src/EventTracker/wwwroot --public-url /",
-    "build": "parcel build client/index.ts -d src/EventTracker/wwwroot --public-url /"
+    "build": "parcel build client/index.html -d src/EventTracker/wwwroot --public-url /",
+    "build-vscode": "parcel build client/vscode.ts -d src/EventTracker/wwwroot --public-url /"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@aspnet/signalr": "^1.0.0",
+    "@types/react": "^16.4.6",
+    "@types/react-dom": "^16.0.6",
     "axios": "^0.18.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1",
+    "tslib": "^1.9.3",
     "typescript": "^2.9.2"
-  }
+  },
+  "dependencies": {}
 }
