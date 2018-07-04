@@ -6,8 +6,7 @@
   "scripts": {
     "start": "parcel client/index.html -d src/EventTracker/wwwroot --public-url /",
     "build": "parcel build client/index.html -d src/EventTracker/wwwroot --public-url /",
-    "build-vscode": "parcel build code/vscode.ts --no-minify -d src/EventTracker/wwwroot --public-url /",
-    "build-empty": "parcel build code/empty.ts --no-minify -d src/EventTracker/wwwroot --public-url /"
+    "build-vscode": "parcel build code/vscode.ts --no-minify -d src/EventTracker/wwwroot --public-url /"
   },
   "author": "",
   "license": "ISC",

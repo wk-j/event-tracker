@@ -1,12 +1,12 @@
 import React from "react"
 import ReactDOM from "react-dom"
-import { hubConnection } from "./hub";
-
 import "./css/style.css"
+import { hubConnection } from "./hub";
 
 type State = {
     clientX: number
     clientY: number
+    words: string[]
     key: string
 }
 
@@ -17,7 +17,8 @@ class App extends React.Component<{}, State> {
         this.state = {
             clientX: 0,
             clientY: 0,
-            key: "#"
+            words: ["~"],
+            key: "~"
         }
 
         hubConnection.on("mouseMove", (event) => {
@@ -28,8 +29,15 @@ class App extends React.Component<{}, State> {
         })
 
         hubConnection.on("keyPress", (event) => {
+            const len = 50
             const key: string = event.key;
+            let cwords = this.state.words;
+            let newWords = [...cwords];
+            if (cwords.length > len) {
+                newWords = cwords.slice(cwords.length - len, cwords.length);
+            }
             this.setState({
+                words: [...newWords, key],
                 key: key.trim() === "" ? ":)" : key
             })
         })
@@ -39,6 +47,7 @@ class App extends React.Component<{}, State> {
         return (
             <div style={{ width: "1000px", marginRight: "auto", marginLeft: "auto", textAlign: "center" }}>
                 <div className="key">{this.state.key}</div>
+                <div className="word">{this.state.words.join("")}</div>
                 <div className="client">({this.state.clientX}, {this.state.clientY})</div>
             </div>
         )

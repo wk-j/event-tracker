@@ -1,8 +1,17 @@
 div.key {
     font-size: 300px;
     color: orange;
+    text-shadow: 1px 5px lightgrey;
+}
+
+div.word {
+    font-size: 30px;
+    color: blueviolet;
+    padding-bottom: 20px;
+    text-shadow: 1px 1px lightgrey;
 }
 
 div.client {
-    font-size: 70px;
+    font-size: 50px;
+    text-shadow: 1px 1px lightgrey;
 }
