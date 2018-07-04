@@ -30,15 +30,18 @@ namespace EventTracker {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             } else {
-                app.UseHsts();
+                // app.UseHsts();
             }
 
             // app.UseHttpsRedirection();
+
             app
+                .UseStaticFiles()
                 .UseCors(builder => {
                     builder.AllowAnyHeader();
                     builder.AllowAnyMethod();
                     builder.AllowAnyOrigin();
+                    builder.AllowCredentials();
                 })
                 .UseMvc();
         }
