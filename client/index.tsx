@@ -50,7 +50,7 @@ class App extends React.Component<{}, State> {
             <div style={{ width: "1000px", marginRight: "auto", marginLeft: "auto", textAlign: "center" }}>
                 <div className="key">{this.state.key}</div>
                 <div className="word">{this.state.words.join("")}</div>
-                <div className="client">{pad(this.state.clientX)} ⚡ {pad(this.state.clientY)}</div>
+                <div className="client">{pad(this.state.clientX)} ~ {pad(this.state.clientY)}</div>
             </div>
         )
     }
