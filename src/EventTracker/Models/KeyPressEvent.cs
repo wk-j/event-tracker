@@ -7,7 +7,6 @@ namespace EventTracker.Models {
         public string Char { set; get; }
         public string Key { set; get; }
         public string Code { set; get; }
-        public int CharCode { set; get; }
         public int KeyCode { set; get; }
         public int Which { set; get; }
         public double Location { set; get; }
