@@ -78,7 +78,7 @@ class App extends React.Component<{}, State> {
 
     public render() {
         return (
-            <div style={{ width: "800px", marginRight: "auto", marginLeft: "auto", textAlign: "center" }}>
+            <div style={{ width: "1100px", marginRight: "auto", marginLeft: "auto", textAlign: "center" }}>
                 <div className="key">{this.state.key}</div>
                 <div className="word">{this.state.words.join("")}</div>
                 <div className="client">{pad(this.state.clientX)} ~ {pad(this.state.clientY)}</div>
