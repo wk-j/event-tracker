@@ -12,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.FileProviders;
+using System.IO;
 
 namespace EventTracker {
     public class Startup {
@@ -39,8 +41,15 @@ namespace EventTracker {
 
             // app.UseHttpsRedirection();
 
+            var def = new DefaultFilesOptions();
+            def.DefaultFileNames.Clear();
+            def.DefaultFileNames.Add("index.html");
+
             app
-                .UseStaticFiles()
+                .UseDefaultFiles(def)
+                .UseStaticFiles(new StaticFileOptions {
+                    // FileProvider = new PhysicalFileProvider(Directory.GetCurrentDirectory())
+                })
                 .UseSignalR(routes => {
                     routes.MapHub<TrackingHub>("/trackingHub");
                 })

@@ -1,6 +1,6 @@
 import axios from "axios"
 
-let service = "https://localhost:5001"
+let service = "https://localhost:7777"
 
 type Result = {
     success: boolean
