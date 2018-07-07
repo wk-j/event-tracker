@@ -33,7 +33,7 @@ namespace EventTracker {
             services.AddSignalR();
         }
 
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env) {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILogger<Startup> logger) {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             } else {
@@ -42,17 +42,20 @@ namespace EventTracker {
 
             // app.UseHttpsRedirection();
 
+            var asm = Assembly.GetEntryAssembly();
+            var asmName = asm.GetName().Name;
+
             var defaultOptions = new DefaultFilesOptions();
             defaultOptions.DefaultFileNames.Clear();
             defaultOptions.DefaultFileNames.Add("index.html");
-            defaultOptions.FileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly(), "EventTracker.wwwroot");
+            defaultOptions.FileProvider = new EmbeddedFileProvider(asm, $"{asmName}.wwwroot");
+
 
             app
                 .UseDefaultFiles(defaultOptions)
-                .UseStaticFiles()
                 .UseStaticFiles(new StaticFileOptions {
                     FileProvider =
-                        new EmbeddedFileProvider(Assembly.GetEntryAssembly(), "EventTracker.wwwroot")
+                        new EmbeddedFileProvider(asm, $"{asmName}.wwwroot")
                 })
                 .UseSignalR(routes => {
                     routes.MapHub<TrackingHub>("/trackingHub");
