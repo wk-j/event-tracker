@@ -42,15 +42,17 @@ namespace EventTracker {
 
             // app.UseHttpsRedirection();
 
-            var def = new DefaultFilesOptions();
-            def.DefaultFileNames.Clear();
-            def.DefaultFileNames.Add("index.html");
-            def.FileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly(), "EventTracker.wwwroot");
+            var defaultOptions = new DefaultFilesOptions();
+            defaultOptions.DefaultFileNames.Clear();
+            defaultOptions.DefaultFileNames.Add("index.html");
+            defaultOptions.FileProvider = new EmbeddedFileProvider(Assembly.GetExecutingAssembly(), "EventTracker.wwwroot");
 
             app
-                .UseDefaultFiles(def)
+                .UseDefaultFiles(defaultOptions)
+                .UseStaticFiles()
                 .UseStaticFiles(new StaticFileOptions {
-                    FileProvider = new EmbeddedFileProvider(Assembly.GetEntryAssembly(), "EventTracker.wwwroot")
+                    FileProvider =
+                        new EmbeddedFileProvider(Assembly.GetEntryAssembly(), "EventTracker.wwwroot")
                 })
                 .UseSignalR(routes => {
                     routes.MapHub<TrackingHub>("/trackingHub");
