@@ -1,6 +1,6 @@
 ## Comamnds
 
-```
+```bash
 dotnet-dev-certs
 
 dotnet tool install dotnet-dev-certs -g
