@@ -1,7 +1,7 @@
 ## VS Code Event Tracker
 
 ```
-dotnet add package wk.EventTracker
+dotnet tool install -g wk.EventTracker
 ```
 
 ## Usage
