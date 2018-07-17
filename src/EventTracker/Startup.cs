@@ -29,7 +29,6 @@ namespace EventTracker {
                 .AddCors()
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
-
             services.AddSignalR();
         }
 
@@ -37,36 +36,36 @@ namespace EventTracker {
             if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
             } else {
-                // app.UseHsts();
+                app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
+            if (env.IsDevelopment()) {
+                app
+                    .UseDefaultFiles()
+                    .UseStaticFiles()
+                    .UseSignalR(routes => {
+                        routes.MapHub<TrackingHub>("/trackingHub");
+                    })
+                    .UseMvc();
 
-            var asm = Assembly.GetEntryAssembly();
-            var asmName = asm.GetName().Name;
+            } else {
+                var asm = Assembly.GetEntryAssembly();
+                var asmName = asm.GetName().Name;
+                var defaultOptions = new DefaultFilesOptions();
+                defaultOptions.DefaultFileNames.Clear();
+                defaultOptions.DefaultFileNames.Add("index.html");
+                defaultOptions.FileProvider = new EmbeddedFileProvider(asm, $"{asmName}.wwwroot");
 
-            var defaultOptions = new DefaultFilesOptions();
-            defaultOptions.DefaultFileNames.Clear();
-            defaultOptions.DefaultFileNames.Add("index.html");
-            defaultOptions.FileProvider = new EmbeddedFileProvider(asm, $"{asmName}.wwwroot");
-
-
-            app
-                .UseDefaultFiles(defaultOptions)
-                .UseStaticFiles(new StaticFileOptions {
-                    FileProvider =
-                        new EmbeddedFileProvider(asm, $"{asmName}.wwwroot")
-                })
-                .UseSignalR(routes => {
-                    routes.MapHub<TrackingHub>("/trackingHub");
-                })
-                .UseCors(builder => {
-                    builder.AllowAnyHeader();
-                    builder.AllowAnyMethod();
-                    builder.AllowAnyOrigin();
-                    builder.AllowCredentials();
-                })
-                .UseMvc();
+                app
+                    .UseDefaultFiles(defaultOptions)
+                    .UseStaticFiles(new StaticFileOptions {
+                        FileProvider = new EmbeddedFileProvider(asm, $"{asmName}.wwwroot")
+                    })
+                    .UseSignalR(routes => {
+                        routes.MapHub<TrackingHub>("/trackingHub");
+                    })
+                    .UseMvc();
+            }
         }
     }
 }

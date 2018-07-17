@@ -10,11 +10,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\" />
+    <EmbeddedResource Include="wwwroot/*" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="wwwroot/*" />
+    <Folder Include="wwwroot\" />
   </ItemGroup>
 
   <ItemGroup>
